@@ -1,10 +1,10 @@
 public class Planet {
-    double xxPos;
-    double yyPos;
-    double xxVel;
-    double yyVel;
-    double mass;
-    String imgFileName;
+    public double xxPos;
+    public double yyPos;
+    public double xxVel;
+    public double yyVel;
+    public double mass;
+    public String imgFileName;
 
     /**
      * construct a planet
@@ -92,4 +92,9 @@ public class Planet {
         xxPos += dt * xxVel;
         yyPos += dt * yyVel;
     }
+
+    public void draw(){
+        StdDraw.picture(xxPos,yyPos,"images\\"+imgFileName);
+    }
+
 }
