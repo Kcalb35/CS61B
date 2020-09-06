@@ -85,6 +85,7 @@ public class IntList {
             if(B==null) return null;
             else {
                 A = new IntList(B.first,B.rest);
+                return A;
             }
         }
         else{
