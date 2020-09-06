@@ -17,12 +17,11 @@ public class NBody {
             double vy = in.readDouble();
             double m = in.readDouble();
             String imgpath = in.readString();
-
+            
             planets[i-1] = new Planet(px,py,vx,vy,m,imgpath);
         }
         return planets;
     }
-
 
     public static void main(String[] args) {
         double totalTime = Double.parseDouble(args[0]);
@@ -52,19 +51,11 @@ public class NBody {
             }
             StdDraw.picture(0,0,"images/starfield.jpg",2*radius,2*radius);
             for(Planet p : planets){
-                p.draw();
+                StdDraw.picture(p.xxPos,p.yyPos,"images\\"+p.imgFileName);
             }
             StdDraw.show();
             StdDraw.pause(10);
             t += dt;
-        }
-
-        StdOut.printf("%d\n", planets.length);
-        StdOut.printf("%.2e\n", radius);
-        for (int i = 0; i < planets.length; i++) {
-            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
-                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
         }
     }
 }
