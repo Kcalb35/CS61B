@@ -1,12 +1,12 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.Field;
-
 public class TestArrayDeque {
 
     private ArrayDeque<Integer> createTestExample() {
-        // 4 3 2 5 6
+        /*
+         4 3 2 5 6
+         */
         ArrayDeque<Integer> li = new ArrayDeque<>();
         li.addFirst(2);
         li.addFirst(3);
@@ -17,61 +17,76 @@ public class TestArrayDeque {
     }
 
     @Test
-    public void TestBasic(){
+    public void testBasic() {
         ArrayDeque<Integer> li = createTestExample();
 
-        Assert.assertEquals(li.size(),5);
+        Assert.assertEquals(li.size(), 5);
         Assert.assertFalse(li.isEmpty());
     }
 
     @Test
-    public void TestPrint(){
-        var li = createTestExample();
+    public void testPrint() {
+        var li = new ArrayDeque<Integer>();
+        for (int i = 0; i < 20; i++) {
+            li.addFirst(i);
+        }
+        li.printDeque();
+
+        for (int i = 0; i < 20; i++) {
+            li.removeLast();
+        }
+
+        for (int i = 0; i < 30; i++) {
+            li.addFirst(i);
+        }
         li.printDeque();
     }
 
     @Test
-    public void TestRemove(){
-        var li = createTestExample();
+    public void testRemove() {
+        var li = new ArrayDeque<Integer>();
 
-        Assert.assertEquals(li.removeFirst().intValue(),4);
-        Assert.assertEquals(li.size(),4);
-        Assert.assertEquals(li.removeLast().intValue(),6);
-        Assert.assertEquals(li.size(),3);
-
-        // 清空list
-        for (int i = 0; i < 3; i++) {
-            li.removeFirst();
+        for (int i = 0; i < 22; i++) {
+            li.addFirst(i);
         }
+        Assert.assertEquals(li.removeLast().intValue(), 0);
+    }
+
+    @Test
+    public void testWhenNull() {
+        var li = new ArrayDeque<Integer>();
 
         Assert.assertNull(li.removeLast());
         Assert.assertNull(li.removeFirst());
-        Assert.assertEquals(li.size(),0);
+        Assert.assertEquals(li.size(), 0);
     }
 
     @Test
-    public void TestGet(){
-        var li = createTestExample();
-        Assert.assertEquals(li.get(2).intValue(),2);
-        Assert.assertEquals(li.get(4).intValue(),6);
+    public void testGet() {
+        var li = new ArrayDeque<Integer>();
+        for (var i = 0; i <= 22; i++) {
+            li.addFirst(i);
+        }
+        li.printDeque();
 
-        Assert.assertNull(li.get(10));
-        Assert.assertNull(li.get(-5));
+        Assert.assertEquals(li.get(21).intValue() , 1);
+
     }
 
 
     @Test
-    public void TestResize() throws NoSuchFieldException, IllegalAccessException {
+    public void testResize()
+            throws NoSuchFieldException, IllegalAccessException {
         ArrayDeque<Integer> li = new ArrayDeque<>();
         for (int i = 0; i < 16; i++) {
             li.addFirst(i);
         }
-        Assert.assertEquals(li.size(),16);
+        Assert.assertEquals(li.size(), 16);
         li.printDeque();
 
         for (int i = 0; i < 16; i++) {
             li.removeLast();
         }
-        Assert.assertEquals(li.size(),0);
+        Assert.assertEquals(li.size(), 0);
     }
 }

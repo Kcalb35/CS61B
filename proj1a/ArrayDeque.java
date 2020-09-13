@@ -29,19 +29,20 @@ public class ArrayDeque<T> {
          */
         head = (head - 1 + list.length) % list.length;
         list[head] = item;
+        size++;
         if (tail == head) {
             doubleSize();
         }
-        size++;
     }
 
     public void addLast(T item) {
         list[tail] = item;
         tail = (tail + 1) % list.length;
+        size++;
         if (tail == head) {
             doubleSize();
         }
-        size++;
+
     }
 
     public boolean isEmpty() {
