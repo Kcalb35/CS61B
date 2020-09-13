@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Planet {
     public double xxPos;
     public double yyPos;
@@ -64,7 +66,7 @@ public class Planet {
         return (p.yyPos - this.yyPos) / distance * force;
     }
 
-    public double calcNetForceExertedByX(Planet[] planets){
+    public double calcNetForceExertedByX(List<Planet> planets){
         double force = 0;
         for (Planet planet:planets){
             if(this.equals(planet)) continue;
@@ -73,7 +75,7 @@ public class Planet {
         return force;
     }
 
-    public double calcNetForceExertedByY(Planet[] planets){
+    public double calcNetForceExertedByY(List<Planet> planets){
         double force = 0;
         for(Planet planet:planets){
             if(this.equals(planet)) continue;
@@ -94,7 +96,7 @@ public class Planet {
     }
 
     public void draw(){
-        StdDraw.picture(xxPos,yyPos,"images\\"+imgFileName);
+        StdDraw.picture(xxPos,yyPos,"images/"+imgFileName);
     }
 
 }
