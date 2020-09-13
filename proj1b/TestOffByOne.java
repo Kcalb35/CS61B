@@ -11,9 +11,11 @@ public class TestOffByOne {
     public void testEqualChars() {
         assertFalse(offByOne.equalChars('a', 'a'));
         assertFalse(offByOne.equalChars('A', 'Z'));
+
         assertTrue(offByOne.equalChars('a', 'b'));
         assertTrue(offByOne.equalChars('b', 'a'));
-
+        assertFalse(offByOne.equalChars('A', 'a'));
+        assertTrue(offByOne.equalChars('%', '&'));
     }
 
 }
