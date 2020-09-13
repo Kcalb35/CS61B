@@ -1,4 +1,4 @@
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> {
 
     private int size;
     private T[] list;
@@ -14,7 +14,7 @@ public class ArrayDeque<T> implements Deque<T>{
         size = 0;
     }
 
-    private void DoubleSize() {
+    private void doubleSize() {
         T[] newList = (T[]) new Object[list.length * 2];
         System.arraycopy(list, head, newList, 0, (list.length - head));
         System.arraycopy(list, 0, newList, (list.length - head), tail);
@@ -24,11 +24,13 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     public void addFirst(T item) {
-        // 先插入，再判断
+        /*
+        先插入再判断是否扩容
+         */
         head = (head - 1 + list.length) % list.length;
         list[head] = item;
         if (tail == head) {
-            DoubleSize();
+            doubleSize();
         }
         size++;
     }
@@ -37,7 +39,7 @@ public class ArrayDeque<T> implements Deque<T>{
         list[tail] = item;
         tail = (tail + 1) % list.length;
         if (tail == head) {
-            DoubleSize();
+            doubleSize();
         }
         size++;
     }
@@ -67,36 +69,36 @@ public class ArrayDeque<T> implements Deque<T>{
             list[tail] = null;
             size--;
             if (1.0 * size / list.length <= 0.25 && list.length > 8) {
-                HalfSize();
+                halfSize();
             }
             return item;
         }
     }
 
     public T removeFirst() {
-        if(head == tail){
+        if (head == tail) {
             return null;
         } else {
             T item = list[head];
             list[head] = null;
             head = (head + 1) % list.length;
-            size --;
+            size--;
             if (1.0 * size / list.length <= 0.25 && list.length > 8) {
-                HalfSize();
+                halfSize();
             }
             return item;
         }
     }
 
-    private void HalfSize() {
+    private void halfSize() {
         T[] newList = (T[]) new Object[list.length / 2];
-        if(head < tail) {
+        if (head < tail) {
             System.arraycopy(list, head, newList, 0, size);
             head = 0;
             tail = size;
-        }else {
-            System.arraycopy(list,head,newList,0,(list.length - head));
-            System.arraycopy(list,0,newList,(list.length - head),tail);
+        } else {
+            System.arraycopy(list, head, newList, 0, (list.length - head));
+            System.arraycopy(list, 0, newList, (list.length - head), tail);
             head = 0;
             tail = size;
         }
@@ -104,11 +106,11 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     public T get(int index) {
-        int realIndex = (head + index) % list.length;
-        if (realIndex < tail) {
-            return list[realIndex];
-        } else {
+        if (index >= size || index < 0) {
             return null;
         }
+
+        int realIndex = (head + index) % list.length;
+        return list[realIndex];
     }
 }
