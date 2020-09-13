@@ -69,7 +69,7 @@ public class TestArrayDeque {
         }
         li.printDeque();
 
-        Assert.assertEquals(li.get(21).intValue() , 1);
+        Assert.assertEquals(li.get(21).intValue(), 1);
 
     }
 
